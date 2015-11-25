@@ -24,15 +24,16 @@ public class MainApp extends Application {
     private ObservableList<Person> personData = FXCollections.observableArrayList();
 
     public MainApp(){
-        personData.add(new Person("Hans", "Muster"));
-        personData.add(new Person("Ruth", "Mueller"));
-        personData.add(new Person("Heinz", "Kurz"));
-        personData.add(new Person("Cornelia", "Meier"));
-        personData.add(new Person("Werner", "Meyer"));
-        personData.add(new Person("Lydia", "Kunz"));
-        personData.add(new Person("Anna", "Best"));
-        personData.add(new Person("Stefan", "Meier"));
-        personData.add(new Person("Martin", "Mueller"));
+        personData.add(new Person("Geralt", "Z Rivii", "Witcher master", 10000, "24.12.665", "iamthewitcher@witchers.com", "+48 600 700 800"));
+        personData.add(new Person("Bertrand", "Tauler"));
+        personData.add(new Person("Dermot", "Marranga"));
+        personData.add(new Person("Ivar", "Zle Oko"));
+        personData.add(new Person("Hemminks", "Blada Twarz"));
+        personData.add(new Person("Stary", "Wiedzmin"));
+        personData.add(new Person("Gaetan", "Zia"));
+        personData.add(new Person("Kruk", "TheBest"));
+        personData.add(new Person("Leo", "Messi"));
+        personData.add(new Person("Sorel", "Sample"));
     }
 
     public ObservableList<Person> getPersonData() {

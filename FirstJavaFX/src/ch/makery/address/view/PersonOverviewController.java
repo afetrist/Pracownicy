@@ -47,8 +47,17 @@ public class PersonOverviewController {
     @FXML
     private void initialize() {
         // Initialize the person table with the two columns.
-        firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
-        lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
+        firstNameColumn.setCellValueFactory(
+                cellData -> cellData.getValue().firstNameProperty());
+        lastNameColumn.setCellValueFactory(
+                cellData -> cellData.getValue().lastNameProperty());
+
+        // Clear person details.
+        showPersonDetails(null);
+
+        // Listen for selection changes and show the person details when changed.
+        personTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showPersonDetails(newValue));
     }
 
     /**
@@ -61,5 +70,25 @@ public class PersonOverviewController {
 
         // Add observable list data to the table
         personTable.setItems(mainApp.getPersonData());
+    }
+
+    private void showPersonDetails(Person person) {
+        if (person != null) {
+            // Fill the labels with info from the person object.
+            firstNameLabel.setText(person.getFirstName());
+            lastNameLabel.setText(person.getLastName());
+            positionLabel.setText(person.getPosition());
+            salaryLabel.setText(Integer.toString(person.getSalary()));
+            employedLabel.setText(person.getDate());
+            emailLabel.setText(person.getEmail());
+            phoneNumberLabel.setText(person.getPhone());
+        } else {
+            firstNameLabel.setText("");
+            lastNameLabel.setText("");
+            positionLabel.setText("");
+            salaryLabel.setText("");
+            employedLabel.setText("");
+            emailLabel.setText("");
+            phoneNumberLabel.setText("");        }
     }
 }

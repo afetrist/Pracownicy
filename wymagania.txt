@@ -10,3 +10,4 @@ Sytuacje problematyczne:
  1) usuwanie pracowników - koncept polega na tym, żeby praconik miał niewidoczne dla użytkownika zewnętrznego pole "usunięty". Następnie wysyłane jest do zespołów i projektów informacja o tym. Jeżeli uznają, że pracownik faktycznie może zostać usunięty, to go usuwają, jeżeli nie to zostawiają ze wszystkich swoich modułów. Na rzadanie administrator serwera lub ktoś inny możne usunąć pracowników zalegających w bazie. Aby to zrobić wysyła się zapytanie o listę projektów i zespołów w których dany pracownik jest (@2up). Jeżeli dostanie dwie puste listy i data zatrudnienia > miesiąc to go usuwa.
  2) zwolnienie pracownika - będzie za mało pracowników w teamie/nad projektem?
  3) podniesienie pensji pracownika - maxymalny koszt projektów nad którymi pracuje zostanie przekroczony
+  ==> zapytanie czy można tak zrobić

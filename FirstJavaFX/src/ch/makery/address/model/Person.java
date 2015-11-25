@@ -47,6 +47,17 @@ public class Person {
         this.phone = new SimpleStringProperty("+48 123 456 789");
     }
 
+    public Person(String firstName, String lastName, String position, int salary, String date, String email, String phone){
+        this.firstName = new SimpleStringProperty(firstName);
+        this.lastName = new SimpleStringProperty(lastName);
+        this.position = new SimpleStringProperty(position);
+        this.salary = new SimpleIntegerProperty(salary);
+        this.date = new SimpleStringProperty(date);
+        this.email = new SimpleStringProperty(email);
+        this.phone = new SimpleStringProperty(phone);
+
+    }
+
     public String getFirstName() {
         return firstName.get();
     }
