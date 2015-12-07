@@ -17,6 +17,8 @@ public class PersonOverviewController {
     private TableColumn<Person, String> firstNameColumn;
     @FXML
     private TableColumn<Person, String> lastNameColumn;
+    @FXML
+    private TableColumn<Person, String> positionColumn;
 
     @FXML
     private Label firstNameLabel;
@@ -59,6 +61,8 @@ public class PersonOverviewController {
                 cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(
                 cellData -> cellData.getValue().lastNameProperty());
+        positionColumn.setCellValueFactory(
+                cellData -> cellData.getValue().positionProperty());
 
         // Clear person details.
         showPersonDetails(null);
