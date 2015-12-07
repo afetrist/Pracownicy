@@ -1,17 +1,14 @@
 package ch.makery.address.model;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
+import javafx.beans.property.*;
 
 
 public class Person {
 
+    private final LongProperty id;
     private final StringProperty firstName;
     private final StringProperty lastName;
     private final StringProperty position;
@@ -19,7 +16,13 @@ public class Person {
     private final StringProperty phone;
     private final StringProperty date;
     private final StringProperty email;
+    private final StringProperty pesel;
+    private final StringProperty url;
+    private final ObjectProperty<ArrayList<Payment>> salaryHistory;
+    private ObjectProperty<ArrayList<Integer>> projectsParticipated;
+    private ObjectProperty<ArrayList<Integer>> teamsJoined;
 
+    private static long nextId = 0;
     //private final ObjectProperty<LocalDate> birthday;
 
     /**
@@ -36,6 +39,9 @@ public class Person {
      * @param lastName
      */
     public Person(String firstName, String lastName) {
+        this.id = new SimpleLongProperty(Person.nextId);
+        Person.nextId++;
+
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
 
@@ -45,9 +51,16 @@ public class Person {
         this.date = new SimpleStringProperty("15.07.1410");
         this.email = new SimpleStringProperty("white@withers.com");
         this.phone = new SimpleStringProperty("+48 123 456 789");
+        this.pesel = new SimpleStringProperty("94010100001");
+        this.url = new SimpleStringProperty("");
+        this.salaryHistory = new SimpleObjectProperty<ArrayList<Payment>>();
+        this.projectsParticipated = new SimpleObjectProperty<ArrayList<Integer>>();
+        this.teamsJoined = new SimpleObjectProperty<ArrayList<Integer>>();
     }
 
-    public Person(String firstName, String lastName, String position, int salary, String date, String email, String phone){
+    public Person(String firstName, String lastName, String position, int salary, String date, String email, String phone, String pesel, String url){
+        this.id = new SimpleLongProperty(Person.nextId);
+        Person.nextId++;
         this.firstName = new SimpleStringProperty(firstName);
         this.lastName = new SimpleStringProperty(lastName);
         this.position = new SimpleStringProperty(position);
@@ -55,7 +68,11 @@ public class Person {
         this.date = new SimpleStringProperty(date);
         this.email = new SimpleStringProperty(email);
         this.phone = new SimpleStringProperty(phone);
-
+        this.pesel = new SimpleStringProperty(pesel);
+        this.url = new SimpleStringProperty(url);
+        this.salaryHistory = new SimpleObjectProperty<ArrayList<Payment>>();
+        this.projectsParticipated = new SimpleObjectProperty<ArrayList<Integer>>();
+        this.teamsJoined = new SimpleObjectProperty<ArrayList<Integer>>();
     }
 
     public String getFirstName() {
@@ -140,5 +157,41 @@ public class Person {
 
     public void setEmail(String email) {
         this.email.set(email);
+    }
+
+    public long getId() {
+        return id.get();
+    }
+
+    public LongProperty idProperty() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id.set(id);
+    }
+
+    public String getPesel() {
+        return pesel.get();
+    }
+
+    public StringProperty peselProperty() {
+        return pesel;
+    }
+
+    public void setPesel(String pesel) {
+        this.pesel.set(pesel);
+    }
+
+    public String getUrl() {
+        return url.get();
+    }
+
+    public StringProperty urlProperty() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url.set(url);
     }
 }

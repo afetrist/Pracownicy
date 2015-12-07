@@ -29,6 +29,8 @@ public class PersonOverviewController {
     private Label emailLabel;
     @FXML
     private Label phoneNumberLabel;
+    @FXML
+    private Label peselLabel;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -82,6 +84,7 @@ public class PersonOverviewController {
             employedLabel.setText(person.getDate());
             emailLabel.setText(person.getEmail());
             phoneNumberLabel.setText(person.getPhone());
+            peselLabel.setText(person.getPesel());
         } else {
             firstNameLabel.setText("");
             lastNameLabel.setText("");
@@ -89,6 +92,8 @@ public class PersonOverviewController {
             salaryLabel.setText("");
             employedLabel.setText("");
             emailLabel.setText("");
-            phoneNumberLabel.setText("");        }
+            phoneNumberLabel.setText("");
+            peselLabel.setText("");
+        }
     }
 }
