@@ -6,6 +6,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Person;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 public class PersonOverviewController {
     @FXML
@@ -31,6 +34,9 @@ public class PersonOverviewController {
     private Label phoneNumberLabel;
     @FXML
     private Label peselLabel;
+
+    @FXML
+    private ImageView imageView;
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -85,6 +91,8 @@ public class PersonOverviewController {
             emailLabel.setText(person.getEmail());
             phoneNumberLabel.setText(person.getPhone());
             peselLabel.setText(person.getPesel());
+
+            imageView.setImage(new Image(person.getUrl()));
         } else {
             firstNameLabel.setText("");
             lastNameLabel.setText("");
@@ -94,6 +102,8 @@ public class PersonOverviewController {
             emailLabel.setText("");
             phoneNumberLabel.setText("");
             peselLabel.setText("");
+
+            imageView.setImage(new Image("https://pbs.twimg.com/profile_images/425274582581264384/X3QXBN8C.jpeg"));
         }
     }
 }

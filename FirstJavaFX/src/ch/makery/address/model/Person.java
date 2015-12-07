@@ -52,7 +52,7 @@ public class Person {
         this.email = new SimpleStringProperty("white@withers.com");
         this.phone = new SimpleStringProperty("+48 123 456 789");
         this.pesel = new SimpleStringProperty("94010100001");
-        this.url = new SimpleStringProperty("");
+        this.url = new SimpleStringProperty("http://gaspull.geeksaresexytech.netdna-cdn.com/wp-content/uploads/2011/02/mario.jpg");
         this.salaryHistory = new SimpleObjectProperty<ArrayList<Payment>>();
         this.projectsParticipated = new SimpleObjectProperty<ArrayList<Integer>>();
         this.teamsJoined = new SimpleObjectProperty<ArrayList<Integer>>();
