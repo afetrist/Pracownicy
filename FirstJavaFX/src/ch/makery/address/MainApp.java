@@ -34,6 +34,7 @@ public class MainApp extends Application {
         personData.add(new Person("Kruk", "TheBest"));
         personData.add(new Person("Leo", "Messi"));
         personData.add(new Person("Sorel", "Sample"));
+        personData.add(new Person("Geraltinnio", "Rodriquez"));
     }
 
     public ObservableList<Person> getPersonData() {

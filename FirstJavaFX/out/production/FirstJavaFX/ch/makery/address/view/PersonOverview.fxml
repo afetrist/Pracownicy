@@ -16,15 +16,16 @@
                     <columns>
                       <TableColumn fx:id="firstNameColumn" prefWidth="122.0" text="Name" />
                       <TableColumn fx:id="lastNameColumn" prefWidth="167.0" text="Surname" />
+                        <TableColumn fx:id="positionColumn" prefWidth="75.0" text="Position" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                      </columnResizePolicy>
                   </TableView>
-                  <TextField layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="206.0" />
-                  <Button layoutX="230.0" layoutY="14.0" mnemonicParsing="false" text="Find" />
-                  <CheckBox layoutX="14.0" layoutY="48.0" mnemonicParsing="false" text="Full Words" />
-                  <CheckBox layoutX="117.0" layoutY="48.0" mnemonicParsing="false" text="All Words" />
+                  <TextField fx:id="filtringData" layoutX="14.0" layoutY="14.0" prefHeight="26.0" prefWidth="206.0" />
+                  <Button fx:id="findButton" layoutX="230.0" layoutY="14.0" mnemonicParsing="false" onAction="#handleFilterPeople" text="Find" />
+                  <CheckBox fx:id="fullWordsCheckBox" layoutX="14.0" layoutY="48.0" mnemonicParsing="false" text="Full Words" />
+                  <CheckBox fx:id="allWordsCheckBox" layoutX="117.0" layoutY="48.0" mnemonicParsing="false" text="All Words" />
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">

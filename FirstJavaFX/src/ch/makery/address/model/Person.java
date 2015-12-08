@@ -75,6 +75,11 @@ public class Person {
         this.teamsJoined = new SimpleObjectProperty<ArrayList<Integer>>();
     }
 
+    public boolean equals(Person otherPerson){
+        if(id == otherPerson.id) return true;
+        else return false;
+    }
+
     public String getFirstName() {
         return firstName.get();
     }

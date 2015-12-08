@@ -1,13 +1,17 @@
 package ch.makery.address.view;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import ch.makery.address.MainApp;
 import ch.makery.address.model.Person;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import java.awt.event.ActionEvent;
+import java.lang.reflect.Array;
+import java.util.*;
 
 
 public class PersonOverviewController {
@@ -40,6 +44,16 @@ public class PersonOverviewController {
     @FXML
     private ImageView imageView;
 
+    @FXML
+    private TextField filtringData;
+    @FXML
+    private Button findButton;
+
+    @FXML
+    private CheckBox fullWordsCheckBox;
+    @FXML
+    private CheckBox allWordsCheckBox;
+
     // Reference to the main application.
     private MainApp mainApp;
 
@@ -67,9 +81,13 @@ public class PersonOverviewController {
         // Clear person details.
         showPersonDetails(null);
 
+        fullWordsCheckBox.setSelected(false);
+        allWordsCheckBox.setSelected(false);
+
         // Listen for selection changes and show the person details when changed.
         personTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
+
     }
 
     /**
@@ -81,7 +99,7 @@ public class PersonOverviewController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        personTable.setItems(mainApp.getPersonData());
+        personTable.setItems(filterPeople());
     }
 
     private void showPersonDetails(Person person) {
@@ -109,5 +127,77 @@ public class PersonOverviewController {
 
             imageView.setImage(new Image("https://pbs.twimg.com/profile_images/425274582581264384/X3QXBN8C.jpeg"));
         }
+    }
+
+    private ObservableList<Person> filterPeople(){
+        ObservableList<Person> myResult = FXCollections.observableArrayList();
+        ObservableList<Person> originalList = mainApp.getPersonData();
+        HashMap<Person, Integer> personMap = new HashMap<>();
+
+        if(filtringData.getText().length() > 0) {
+
+            for (Person person : originalList){
+                int fits = howManyFits(person);
+
+                if(!allWordsCheckBox.isSelected()){
+                    if (fits > 0)
+                        personMap.put(person, new Integer(fits));
+                }
+                else {
+                    if(fits == filtringData.getText().split(" ").length)
+                        myResult.add(person);
+                }
+            }
+        }
+        else {
+            myResult = originalList;
+        }
+
+        if(!allWordsCheckBox.isSelected()) {
+            //Tutaj kiedys bedzie sortowanie personMap po values
+            for(Person person : personMap.keySet())
+                myResult.add(person);
+        }
+        return myResult;
+    }
+
+    private int howManyFits(Person person){
+        int result = 0;
+        String[] keys = filtringData.getText().split(" ");
+
+        if(fullWordsCheckBox.isSelected()){
+            for(String key : keys) {
+                if(person.getFirstName().equals(key)){
+                    result++;
+                    continue;
+                }
+                if(person.getLastName().equals(key)){
+                    result++;
+                    continue;
+                }
+            }
+        }
+        else{
+            for(String key : keys) {
+                if(person.getFirstName().contains(key)){
+                    result++;
+                    continue;
+                }
+                if(person.getLastName().contains(key)) {
+                    result++;
+                    continue;
+                }
+            }
+        }
+
+
+        return result;
+    }
+
+
+
+    @FXML
+    private void handleFilterPeople(){
+        personTable.setItems(filterPeople());
     }
 }
