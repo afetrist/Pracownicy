@@ -86,7 +86,7 @@
                   </TabPane>
                   <Button layoutX="77.0" layoutY="526.0" mnemonicParsing="false" text="New Employee" />
                   <Button layoutX="228.0" layoutY="526.0" mnemonicParsing="false" text="Edit" />
-                  <Button layoutX="321.0" layoutY="526.0" mnemonicParsing="false" text="Delete" />
+                  <Button layoutX="321.0" layoutY="526.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
                </children>
             </AnchorPane>
         </items>

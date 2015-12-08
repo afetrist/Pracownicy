@@ -200,4 +200,17 @@ public class PersonOverviewController {
     private void handleFilterPeople(){
         personTable.setItems(filterPeople());
     }
+
+    @FXML
+    private void handleDeletePerson(){
+        Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+        if(selectedPerson != null){
+            boolean okClicked = mainApp.showPersonDelete(selectedPerson);
+            if(okClicked){
+                mainApp.deletePerson(selectedPerson);
+            }
+        }
+        personTable.setItems(filterPeople());
+
+    }
 }
