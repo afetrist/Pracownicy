@@ -1,5 +1,8 @@
 package ch.makery.address.view;
 
+import ch.makery.address.mockExteriorClasses.Project;
+import ch.makery.address.mockExteriorClasses.Team;
+import ch.makery.address.model.Payment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -53,6 +56,28 @@ public class PersonOverviewController {
     private CheckBox fullWordsCheckBox;
     @FXML
     private CheckBox allWordsCheckBox;
+
+    @FXML
+    private TableView<Payment> salaryHistoryTable;
+    @FXML
+    private TableColumn<Payment, String> salaryColumn;
+    @FXML
+    private TableColumn<Payment, String> endDateColumn;
+
+    @FXML
+    private TableView<Team> teamsHistoryTable;
+    @FXML
+    private TableColumn<Team, String> teamNameColumn;
+    @FXML
+    private TableColumn<Team, String> teamLeaderColumn;
+
+    @FXML
+    private TableView<Project> projectsHistoryTable;
+    @FXML
+    private TableColumn<Project, String> projectTopicColumn;
+    @FXML
+    private TableColumn<Project, String> projectLeaderColumn;
+
 
     // Reference to the main application.
     private MainApp mainApp;
@@ -115,6 +140,19 @@ public class PersonOverviewController {
             peselLabel.setText(person.getPesel());
 
             imageView.setImage(new Image(person.getUrl()));
+
+            salaryColumn.setCellValueFactory(cellData -> cellData.getValue().salaryProperty());
+            endDateColumn.setCellValueFactory(cellData -> cellData.getValue().dateToProperty());
+            salaryHistoryTable.setItems(person.getSalaryHistory());
+
+            teamNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
+            teamLeaderColumn.setCellValueFactory(cellData -> cellData.getValue().leaderProperty());
+            teamsHistoryTable.setItems(person.getTeamsJoined());
+
+            projectTopicColumn.setCellValueFactory(cellData -> cellData.getValue().topicProperty());
+            projectLeaderColumn.setCellValueFactory(cellData -> cellData.getValue().leaderProperty());
+            projectsHistoryTable.setItems(person.getProjectsParticipated());
+
         } else {
             firstNameLabel.setText("");
             lastNameLabel.setText("");
@@ -212,5 +250,43 @@ public class PersonOverviewController {
         }
         personTable.setItems(filterPeople());
 
+    }
+
+    /**
+     * Called when the user clicks the new button. Opens a dialog to edit
+     * details for a new person.
+     */
+    @FXML
+    private void handleNewPerson() {
+        Person tempPerson = new Person();
+        boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
+        if (okClicked) {
+            mainApp.getPersonData().add(tempPerson);
+        }
+    }
+
+    /**
+     * Called when the user clicks the edit button. Opens a dialog to edit
+     * details for the selected person.
+     */
+    @FXML
+    private void handleEditPerson() {
+        Person selectedPerson = personTable.getSelectionModel().getSelectedItem();
+        if (selectedPerson != null) {
+            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+            if (okClicked) {
+                showPersonDetails(selectedPerson);
+            }
+
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Person Selected");
+            alert.setContentText("Please select a person in the table.");
+
+            alert.showAndWait();
+        }
     }
 }

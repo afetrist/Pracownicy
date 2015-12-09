@@ -12,12 +12,17 @@ import java.util.Date;
  */
 public class Payment {
     private final StringProperty dateTo;
-    private final IntegerProperty salary;
+    private final StringProperty salary;
 
     public Payment(int salary){
         Date today = new Date();
         this.dateTo = new SimpleStringProperty(today.getYear() + "-" + today.getMonth() + "-" + today.getDay());
-        this.salary = new SimpleIntegerProperty(salary);
+        this.salary = new SimpleStringProperty(new Integer(salary).toString());
+    }
+
+    public Payment(int salary, String date){
+        this.salary = new SimpleStringProperty(new Integer(salary).toString());
+        this.dateTo = new SimpleStringProperty(date);
     }
 
     public String getDateTo() {
@@ -32,15 +37,15 @@ public class Payment {
         this.dateTo.set(dateTo);
     }
 
-    public int getSalary() {
+    public String getSalary() {
         return salary.get();
     }
 
-    public IntegerProperty salaryProperty() {
+    public StringProperty salaryProperty() {
         return salary;
     }
 
-    public void setSalary(int salary) {
+    public void setSalary(String salary) {
         this.salary.set(salary);
     }
 }

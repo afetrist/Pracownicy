@@ -69,23 +69,47 @@
                     <tabs>
                       <Tab text="Salary history">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="salaryHistoryTable" layoutX="8.0" prefHeight="182.0" prefWidth="441.0">
+                                      <columns>
+                                        <TableColumn fx:id="salaryColumn" prefWidth="211.0" text="Salary" />
+                                        <TableColumn fx:id="endDateColumn" prefWidth="229.0" text="End date" />
+                                      </columns>
+                                    </TableView>
+                                 </children></AnchorPane>
                         </content>
                       </Tab>
                         <Tab text="Teams history">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="teamsHistoryTable" prefHeight="183.0" prefWidth="449.0">
+                                      <columns>
+                                        <TableColumn fx:id="teamNameColumn" prefWidth="210.0" text="Team name" />
+                                        <TableColumn fx:id="teamLeaderColumn" prefWidth="238.0" text="Team leader" />
+                                      </columns>
+                                    </TableView>
+                                 </children></AnchorPane>
                           </content>
                         </Tab>
                       <Tab text="Projects history">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <TableView fx:id="projectsHistoryTable" prefHeight="180.0" prefWidth="449.0">
+                                      <columns>
+                                        <TableColumn fx:id="projectTopicColumn" prefWidth="217.0" text="Project topic" />
+                                        <TableColumn fx:id="projectLeaderColumn" prefWidth="230.0" text="Project leader" />
+                                      </columns>
+                                    </TableView>
+                                 </children></AnchorPane>
                         </content>
                       </Tab>
                     </tabs>
                   </TabPane>
-                  <Button layoutX="77.0" layoutY="526.0" mnemonicParsing="false" text="New Employee" />
-                  <Button layoutX="228.0" layoutY="526.0" mnemonicParsing="false" text="Edit" />
+                  <Button layoutX="77.0" layoutY="526.0" mnemonicParsing="false" onAction="#handleNewPerson" text="New Employee" />
+                  <Button layoutX="228.0" layoutY="526.0" mnemonicParsing="false" onAction="#handleEditPerson" text="Edit" />
                   <Button layoutX="321.0" layoutY="526.0" mnemonicParsing="false" onAction="#handleDeletePerson" text="Delete" />
                </children>
             </AnchorPane>

@@ -3,7 +3,11 @@ package ch.makery.address.model;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import ch.makery.address.mockExteriorClasses.Project;
+import ch.makery.address.mockExteriorClasses.Team;
 import javafx.beans.property.*;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 
 public class Person {
@@ -18,9 +22,11 @@ public class Person {
     private final StringProperty email;
     private final StringProperty pesel;
     private final StringProperty url;
-    private final ObjectProperty<ArrayList<Payment>> salaryHistory;
-    private ObjectProperty<ArrayList<Integer>> projectsParticipated;
-    private ObjectProperty<ArrayList<Integer>> teamsJoined;
+
+
+    private final ObservableList<Payment> salaryHistory;
+    private final ObservableList<Project> projectsParticipated;
+    private final ObservableList<Team> teamsJoined;
 
     private static long nextId = 0;
     //private final ObjectProperty<LocalDate> birthday;
@@ -53,9 +59,18 @@ public class Person {
         this.phone = new SimpleStringProperty("+48 123 456 789");
         this.pesel = new SimpleStringProperty("94010100001");
         this.url = new SimpleStringProperty("http://gaspull.geeksaresexytech.netdna-cdn.com/wp-content/uploads/2011/02/mario.jpg");
-        this.salaryHistory = new SimpleObjectProperty<ArrayList<Payment>>();
-        this.projectsParticipated = new SimpleObjectProperty<ArrayList<Integer>>();
-        this.teamsJoined = new SimpleObjectProperty<ArrayList<Integer>>();
+
+        this.salaryHistory = FXCollections.observableArrayList();
+        this.salaryHistory.add(new Payment(3000, "2010-01-01"));
+        this.salaryHistory.add(new Payment(4000, "2012-01-01"));
+
+        this.projectsParticipated = FXCollections.observableArrayList();
+        this.projectsParticipated.add(new Project());
+        this.projectsParticipated.add(new Project());
+
+        this.teamsJoined = FXCollections.observableArrayList();
+        this.teamsJoined.add(new Team());
+        this.teamsJoined.add(new Team());
     }
 
     public Person(String firstName, String lastName, String position, int salary, String date, String email, String phone, String pesel, String url){
@@ -70,9 +85,18 @@ public class Person {
         this.phone = new SimpleStringProperty(phone);
         this.pesel = new SimpleStringProperty(pesel);
         this.url = new SimpleStringProperty(url);
-        this.salaryHistory = new SimpleObjectProperty<ArrayList<Payment>>();
-        this.projectsParticipated = new SimpleObjectProperty<ArrayList<Integer>>();
-        this.teamsJoined = new SimpleObjectProperty<ArrayList<Integer>>();
+
+        this.salaryHistory = FXCollections.observableArrayList();
+        this.salaryHistory.add(new Payment(3000, "2010-01-01"));
+        this.salaryHistory.add(new Payment(4000, "2012-01-01"));
+
+        this.projectsParticipated = FXCollections.observableArrayList();
+        this.projectsParticipated.add(new Project());
+        this.projectsParticipated.add(new Project());
+
+        this.teamsJoined = FXCollections.observableArrayList();
+        this.teamsJoined.add(new Team());
+        this.teamsJoined.add(new Team());
     }
 
     public boolean equals(Person otherPerson){
@@ -198,5 +222,17 @@ public class Person {
 
     public void setUrl(String url) {
         this.url.set(url);
+    }
+
+    public ObservableList<Payment> getSalaryHistory() {
+        return salaryHistory;
+    }
+
+    public ObservableList<Project> getProjectsParticipated() {
+        return projectsParticipated;
+    }
+
+    public ObservableList<Team> getTeamsJoined() {
+        return teamsJoined;
     }
 }
