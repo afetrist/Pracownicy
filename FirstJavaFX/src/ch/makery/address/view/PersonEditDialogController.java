@@ -25,6 +25,8 @@ public class PersonEditDialogController {
     private TextField phoneNumberField;
     @FXML
     private TextField peselField;
+    @FXML
+    private TextField urlField;
 
 
     private Stage dialogStage;
@@ -64,6 +66,7 @@ public class PersonEditDialogController {
         emailField.setText(person.getEmail());
         phoneNumberField.setText(person.getPhone());
         peselField.setText(person.getPesel());
+        urlField.setText(person.getUrl());
     }
 
     /**
@@ -89,6 +92,7 @@ public class PersonEditDialogController {
             person.setEmail(emailField.getText());
             person.setPhone(phoneNumberField.getText());
             person.setPesel(peselField.getText());
+            person.setUrl(urlField.getText());
 
             okClicked = true;
             dialogStage.close();
@@ -134,6 +138,9 @@ public class PersonEditDialogController {
         }
         if (salaryField.getText() == null || salaryField.getText().length() == 0) {
             errorMessage += "No valid salary!\n";
+        }
+        if (urlField.getText() == null || urlField.getText().length() == 0) {
+            errorMessage += "No valid url of image!\n";
         }
 
 

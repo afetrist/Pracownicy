@@ -145,13 +145,16 @@ public class PersonOverviewController {
             endDateColumn.setCellValueFactory(cellData -> cellData.getValue().dateToProperty());
             salaryHistoryTable.setItems(person.getSalaryHistory());
 
+            person.loadTeams();
             teamNameColumn.setCellValueFactory(cellData -> cellData.getValue().nameProperty());
             teamLeaderColumn.setCellValueFactory(cellData -> cellData.getValue().leaderProperty());
             teamsHistoryTable.setItems(person.getTeamsJoined());
 
+            person.loadProjects();
             projectTopicColumn.setCellValueFactory(cellData -> cellData.getValue().topicProperty());
             projectLeaderColumn.setCellValueFactory(cellData -> cellData.getValue().leaderProperty());
             projectsHistoryTable.setItems(person.getProjectsParticipated());
+
 
         } else {
             firstNameLabel.setText("");
@@ -186,17 +189,42 @@ public class PersonOverviewController {
                         myResult.add(person);
                 }
             }
+            if(!allWordsCheckBox.isSelected()) {
+                LinkedHashMap<Person, Integer> sortedMap = sortHashMap(personMap);
+                for(Person person : sortedMap.keySet())
+                    myResult.add(person);
+            }
         }
         else {
             myResult = originalList;
         }
 
-        if(!allWordsCheckBox.isSelected()) {
-            //Tutaj kiedys bedzie sortowanie personMap po values
-            for(Person person : personMap.keySet())
-                myResult.add(person);
-        }
         return myResult;
+    }
+
+    private LinkedHashMap<Person, Integer> sortHashMap(HashMap<Person, Integer> oldHashMap){
+        Collection<Integer> values = oldHashMap.values();
+        LinkedHashMap<Person, Integer> newHashMap = new LinkedHashMap<Person, Integer>();
+        int max;
+        Person temporaryPerson = null;
+
+
+        while(!oldHashMap.isEmpty()){
+            max = 0;
+            for(Integer i : values){
+                if(i.intValue() > max) {
+                    max = i.intValue();
+                }
+            }
+
+            for(Person person : oldHashMap.keySet())
+                if(oldHashMap.get(person).equals(new Integer(max)))
+                    temporaryPerson = person;
+
+            newHashMap.put(temporaryPerson, new Integer(max));
+            oldHashMap.remove(temporaryPerson);
+        }
+        return newHashMap;
     }
 
     private int howManyFits(Person person){
@@ -207,11 +235,9 @@ public class PersonOverviewController {
             for(String key : keys) {
                 if(person.getFirstName().equals(key)){
                     result++;
-                    continue;
                 }
                 if(person.getLastName().equals(key)){
                     result++;
-                    continue;
                 }
             }
         }
@@ -219,16 +245,12 @@ public class PersonOverviewController {
             for(String key : keys) {
                 if(person.getFirstName().contains(key)){
                     result++;
-                    continue;
                 }
                 if(person.getLastName().contains(key)) {
                     result++;
-                    continue;
                 }
             }
         }
-
-
         return result;
     }
 

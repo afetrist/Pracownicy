@@ -25,11 +25,12 @@ public class Person {
 
 
     private final ObservableList<Payment> salaryHistory;
-    private final ObservableList<Project> projectsParticipated;
-    private final ObservableList<Team> teamsJoined;
+    private ObservableList<Project> projectsParticipated;
+    private ObservableList<Team> teamsJoined;
+
+    private DataLoader projectTeamBoofor;
 
     private static long nextId = 0;
-    //private final ObjectProperty<LocalDate> birthday;
 
     /**
      * Default constructor.
@@ -64,9 +65,7 @@ public class Person {
         this.salaryHistory.add(new Payment(3000, "2010-01-01"));
         this.salaryHistory.add(new Payment(4000, "2012-01-01"));
 
-        this.projectsParticipated = FXCollections.observableArrayList();
-        this.projectsParticipated.add(new Project());
-        this.projectsParticipated.add(new Project());
+        this.projectTeamBoofor = new DataLoader(this.id.getValue());
 
         this.teamsJoined = FXCollections.observableArrayList();
         this.teamsJoined.add(new Team());
@@ -86,13 +85,12 @@ public class Person {
         this.pesel = new SimpleStringProperty(pesel);
         this.url = new SimpleStringProperty(url);
 
+
         this.salaryHistory = FXCollections.observableArrayList();
         this.salaryHistory.add(new Payment(3000, "2010-01-01"));
         this.salaryHistory.add(new Payment(4000, "2012-01-01"));
 
-        this.projectsParticipated = FXCollections.observableArrayList();
-        this.projectsParticipated.add(new Project());
-        this.projectsParticipated.add(new Project());
+        this.projectTeamBoofor = new DataLoader(this.id.getValue());
 
         this.teamsJoined = FXCollections.observableArrayList();
         this.teamsJoined.add(new Team());
@@ -232,7 +230,24 @@ public class Person {
         return projectsParticipated;
     }
 
+    private void setProjectsParticipated(ObservableList<Project> projectsParticipated) {
+        this.projectsParticipated = projectsParticipated;
+    }
+
+    private void setTeamsJoined(ObservableList<Team> teamsJoined) {
+        this.teamsJoined = teamsJoined;
+    }
+
     public ObservableList<Team> getTeamsJoined() {
         return teamsJoined;
     }
+
+    public void loadProjects(){
+        setProjectsParticipated(projectTeamBoofor.getProjects());
+    }
+
+    public void loadTeams(){
+        setTeamsJoined(projectTeamBoofor.getTeams());
+    }
+
 }

@@ -31,6 +31,7 @@
             <Label text="Email" GridPane.rowIndex="5" />
             <Label text="Phone number" GridPane.rowIndex="6" />
             <Label text="Pesel" GridPane.rowIndex="7" />
+            <Label text="Url" GridPane.rowIndex="8" />
             <TextField fx:id="firstNameField" GridPane.columnIndex="1" />
             <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="positionField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
@@ -39,6 +40,7 @@
             <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <TextField fx:id="phoneNumberField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
             <TextField fx:id="peselField"  GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <TextField fx:id="urlField"  GridPane.columnIndex="1" GridPane.rowIndex="8" />
          </children>
       </GridPane>
       <Button onAction="#handleOk"  layoutX="400.0" layoutY="360.0" mnemonicParsing="false" text="OK" />
